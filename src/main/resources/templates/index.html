@@ -12,6 +12,12 @@
     <h1>Welcome to Devs Against Humanity!</h1>
     <div>
         <h2>Create a game here!</h2>
+        <form action="/createLobby", method="POST">
+            <label for="creatorName">Your name: </label>
+            <input id="creatorName" type="text" placeholder="Enter your nickname"><br>
+            <label for="lobbyName">Room name: </label>
+            <input id="lobbyName" type="text" placeholder="Enter the name of the game room">
+        </form>
     </div> 
     <div>
         <h2>Join a game here!</h2>
