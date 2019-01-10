@@ -65,6 +65,15 @@ public class CardLogic {
         handRepository.save(hand);
     }
 
+    public void discardCardsFromHand(Hand hand, List<WhiteCard> whiteCards) {
+        List<WhiteCard> cardsInHand = hand.getCards();
+        for(WhiteCard whiteCard : whiteCards) {
+            cardsInHand.remove(whiteCard);
+        }
+        hand.setCards(cardsInHand);
+        handRepository.save(hand);
+    }
+
     private List<WhiteCard> pullWhiteCards(Deck deck, int pullCount) {
         List<WhiteCard> cards = new ArrayList<>();
         for (int i = 0; i < pullCount; i++) {
