@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeckRepository extends CrudRepository<Deck, Long> {
+
+    Deck findById(long id);
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface BlackCardRepository extends CrudRepository<BlackCard, Long> {
 
     List<BlackCard> findAll();
+    BlackCard findById(long id);
 }
