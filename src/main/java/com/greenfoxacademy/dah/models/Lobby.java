@@ -1,6 +1,7 @@
 package com.greenfoxacademy.dah.models;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Lobby {
-    private String id;
+    private Integer id;
     private String name;
     private List<String> playerNameList;
     private boolean isStartable;
@@ -20,13 +21,16 @@ public class Lobby {
     public Lobby(String name, String creatorName) {
         this.id = generateId();
         this.name = name;
+        playerNameList = new ArrayList<>();
         playerNameList.add(creatorName);
     }
 
-    private String generateId() {
+    public Integer getId() {
+        return this.id;
+    }
+
+    private Integer generateId() {
         Random rand = new Random();
-        byte[] array = new byte[4];
-        rand.nextBytes(array);
-        return new String(array, Charset.forName("UTF-8"));
+        return rand.nextInt(10000);
     }
 }
