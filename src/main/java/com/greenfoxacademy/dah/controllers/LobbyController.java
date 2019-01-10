@@ -20,11 +20,12 @@ public class LobbyController {
     }
 
     @PostMapping("/createLobby")
-    public String createLobby(@RequestParam("creatorName") String creatorName,
+    public String createLobby(@RequestParam(value = "creatorName") String creatorName,
                               @RequestParam("lobbyName") String lobbyName) {
         Lobby lobby = new Lobby(lobbyName, creatorName);
         lobbies.add(lobby);
-        return "redirect:/" + lobby.getId() + "/lobby/";
+        System.out.println(lobby.getId());
+        return "redirect:/cah/game/" + lobby.getId() + "/lobby/";
     }
 
     @GetMapping("/{id}/lobby/")
