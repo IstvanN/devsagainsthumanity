@@ -21,4 +21,6 @@ public class Player {
   private String name;
   private List<WhiteCard> hand;
   private int score;
+  private boolean canBid;
+  private boolean canGiveCard;
 }
