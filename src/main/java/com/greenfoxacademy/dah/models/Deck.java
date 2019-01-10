@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -15,6 +15,12 @@ import java.util.List;
 @Entity
 public class Deck {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @OneToMany
     private List<BlackCard> blackCards;
+    @OneToMany
     private List<WhiteCard> whiteCards;
 }
