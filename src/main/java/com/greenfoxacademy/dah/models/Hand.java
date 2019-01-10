@@ -19,4 +19,8 @@ public class Hand {
 
     @OneToMany
     private List<WhiteCard> cards;
+
+    @OneToOne(mappedBy = "hand", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
+    private Player player;
 }

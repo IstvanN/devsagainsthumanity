@@ -1,16 +1,16 @@
 package com.greenfoxacademy.dah.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Player {
 
@@ -19,7 +19,11 @@ public class Player {
   private long id;
 
   private String name;
-  private List<WhiteCard> hand;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "hand_id")
+  private Hand hand;
+
   private int score;
   private boolean canBid;
   private boolean canGiveCard;
