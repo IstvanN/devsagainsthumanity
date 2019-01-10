@@ -34,7 +34,6 @@ public class LobbyController {
     @GetMapping("/app/lobby/{id}")
     public String showLobby(@PathVariable("id") int id, Model model) {
         Lobby lobby = getLobbyById(id);
-        model.addAttribute("players", lobby.getPlayerNameList());
         model.addAttribute("lobby", lobby);
         return "lobby";
     }
