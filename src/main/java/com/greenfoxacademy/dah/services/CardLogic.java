@@ -27,10 +27,12 @@ public class CardLogic {
     @Autowired
     HandRepository handRepository;
 
-    public void createDeck() {
+    public Deck createDeck() {
         Deck deck = new Deck();
         shuffleDeckCards(deck);
         deckRepository.save(deck);
+
+        return deck;
     }
 
     public Deck getDeck(long id) {
@@ -41,10 +43,12 @@ public class CardLogic {
         return handRepository.findById(id);
     }
 
-    public void createHand(Deck deck) {
+    public Hand createHand(Deck deck) {
         Hand hand = new Hand();
         hand.setCards(pullWhiteCards(deck, 10));
         handRepository.save(hand);
+
+        return hand;
     }
 
     private void shuffleDeckCards(Deck deck) {

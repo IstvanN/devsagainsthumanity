@@ -1,5 +1,6 @@
 package com.greenfoxacademy.dah.models;
 
+import com.greenfoxacademy.dah.services.CardLogic;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,6 +28,8 @@ public class GameRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private int genereatedId;
+
     private String name;
 
     @OneToMany
@@ -34,4 +38,10 @@ public class GameRoom {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "deck_id")
     private Deck deck;
+
+    public GameRoom(int generatedId) {
+        this.genereatedId = generatedId;
+        this.playerList = new ArrayList<>();
+        this.deck = new Deck();
+    }
 }

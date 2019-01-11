@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class GameRoomDTO {
-    private long id;
+    private int generatedId;
     private String name;
     private List<PlayerDTO> playerDTOList;
     private DeckDTO deckDTO;

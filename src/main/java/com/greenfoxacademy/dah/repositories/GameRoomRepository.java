@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameRoomRepository extends CrudRepository<GameRoom, Long> {
+    GameRoom getByGenereatedId(int generatedId);
 }
