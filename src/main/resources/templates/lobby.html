@@ -18,11 +18,20 @@
         /*<![CDATA[*/
         let playerNames = /*[[${playerNames}]]*/ 'default';
         /*]]>*/
+
         function createAndAppendListElements() {
             playerNames.forEach(playerName => {
-                let myPlayer = document.createElement('li')
+                let myPlayer = document.createElement('li');
+
+                let btn = document.createElement('BUTTON');
+                btn.setAttribute('class', 'gameJoinerBtn');
+                let t = document.createTextNode("START GAME");
+                btn.appendChild(t);
+
+                playerNames.length > 2 ? btn.style.display = 'block' : btn.style.display = 'none';
 
                 myPlayer.append(playerName);
+                myPlayer.append(btn);
                 myPlayerUnorderedList.append(myPlayer);
             });
         }
