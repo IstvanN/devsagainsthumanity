@@ -23,4 +23,8 @@ public class Deck {
     private List<BlackCard> blackCards;
     @OneToMany
     private List<WhiteCard> whiteCards;
+
+    @OneToOne(mappedBy = "deck", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
+    private GameRoom gameRoom;
 }
