@@ -21,7 +21,12 @@
         </form>
     </div> 
     <div>
+        <form action="/cah/game/joinLobby", method="POST">
         <h2>Join a game here!</h2>
+            <input id="playerName" name="playerName" type="text" placeholder="Enter your nickname" required><br>
+            <input id="existingLobbyId" name="existingLobbyId" type="number" placeholder="Enter the id of the game room" required><br>
+            <button>JOIN ROOM</button>
+        </form>
     </div>   
 </body>
 </html>
