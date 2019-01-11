@@ -54,9 +54,12 @@ public class LobbyController {
     @PostMapping("/joinLobby")
     public String createLobby(@RequestParam(value = "playerName") String playerName,
                               @RequestParam("existingLobbyId") int existingLobbyId) {
-        Player player = lobbyService.createPlayer(playerName);
-        lobbyService.getLobbyByGeneratedId(existingLobbyId).getPlayerList().add(player);
+        if (lobbyService.getLobbyByGeneratedId(existingLobbyId) != null) {
+            Player player = lobbyService.createPlayer(playerName);
+            lobbyService.getLobbyByGeneratedId(existingLobbyId).getPlayerList().add(player);
 
-        return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby/";
+            return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby/";
+        }
+        return "redirect:/cah/game/";
     }
 }
