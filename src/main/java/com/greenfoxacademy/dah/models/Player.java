@@ -13,11 +13,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 public class Player {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Column(unique = true)
   private String name;
 
   @OneToOne(fetch = FetchType.LAZY)
@@ -25,6 +25,11 @@ public class Player {
   private Hand hand;
 
   private int score;
+  private boolean isReady;
   private boolean canBid;
   private boolean canGiveCard;
+
+  public Player(String name) {
+    this.name = name;
+  }
 }

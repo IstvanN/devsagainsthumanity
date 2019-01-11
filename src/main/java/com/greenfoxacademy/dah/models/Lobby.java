@@ -1,6 +1,5 @@
 package com.greenfoxacademy.dah.models;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,24 +8,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Lobby {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int generatedId;
     private String name;
-    private List<String> playerNameList;
     private boolean isStartable;
 
-    public Lobby(String name, String creatorName) {
-        this.id = generateId();
-        this.name = name;
-        playerNameList = new ArrayList<>();
-        playerNameList.add(creatorName);
-    }
+    @OneToMany
+    private List<Player> playerList;
 
-    public Integer getId() {
-        return this.id;
+    public Lobby(String name) {
+        this.generatedId = generateId();
+        this.name = name;
+        playerList = new ArrayList<>();
     }
 
     private Integer generateId() {
