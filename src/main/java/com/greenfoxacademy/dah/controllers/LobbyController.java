@@ -27,7 +27,7 @@ public class LobbyController {
         return "index";
     }
 
-    @PostMapping("/createLobby")
+    @PostMapping("/create-lobby")
     public String createLobby(@RequestParam(value = "creatorName") String creatorName,
                               @RequestParam("lobbyName") String lobbyName) {
         Lobby lobby = lobbyService.createNewLobby(lobbyName);
@@ -51,15 +51,27 @@ public class LobbyController {
         return "lobby";
     }
 
-    @PostMapping("/joinLobby")
+    @PostMapping("/join-lobby")
     public String createLobby(@RequestParam(value = "playerName") String playerName,
                               @RequestParam("existingLobbyId") int existingLobbyId) {
         if (lobbyService.getLobbyByGeneratedId(existingLobbyId) != null) {
             Player player = lobbyService.createPlayer(playerName);
             lobbyService.getLobbyByGeneratedId(existingLobbyId).getPlayerList().add(player);
 
-            return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby/";
+            return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby";
         }
         return "redirect:/cah/game/";
+    }
+
+    @PostMapping("/set-player-ready")
+    public String getIsReadyData(@RequestParam(value = "playerName") String playerName,
+                                 @RequestParam("existingLobbyId") int existingLobbyId) {
+        Player player = lobbyService.getPlayerByName(playerName);
+        player.setReady(true);
+
+        if (lobbyService.checkIfEveryoneIsReady(existingLobbyId)) {
+            return "/" + existingLobbyId + "/" + player.getId() + "/game-start";
+        }
+        return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby";
     }
 }

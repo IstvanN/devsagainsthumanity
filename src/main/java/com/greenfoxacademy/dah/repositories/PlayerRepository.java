@@ -12,4 +12,6 @@ public interface PlayerRepository extends CrudRepository<Player, Long> {
   Player findById(long id);
 
   List<Player> findAll();
+
+  Player findFirstByName(String name);
 }

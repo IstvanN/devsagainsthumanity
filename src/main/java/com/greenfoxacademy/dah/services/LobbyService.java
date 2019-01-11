@@ -55,4 +55,20 @@ public class LobbyService {
 
     return nameList;
   }
+
+  public Player getPlayerByName(String playerName) {
+    return playerRepository.findFirstByName(playerName);
+  }
+
+  public boolean checkIfEveryoneIsReady(int existingLobbyId) {
+    boolean isEveryOneReady = true;
+    Lobby lobby = lobbyRepository.getByGeneratedId(existingLobbyId);
+
+    for (int i = 0; i <= lobby.getPlayerList().size(); i++) {
+      if (lobby.getPlayerList().get(i).isReady() == false) {
+        isEveryOneReady = false;
+      }
+    }
+    return isEveryOneReady;
+  }
 }
