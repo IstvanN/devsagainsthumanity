@@ -48,11 +48,8 @@ public class LobbyController {
         List<String> playerNames = lobbyService.getPlayerNames();
 
         model.addAttribute("lobby", lobby);
-      System.out.println(lobby.getGeneratedId());
         model.addAttribute("playerNames", playerNames);
-      System.out.println(player.getName());
         model.addAttribute("playerId", player.getId());
-      System.out.println(playerNames);
 
         return "lobby";
     }
