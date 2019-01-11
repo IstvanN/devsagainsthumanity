@@ -10,22 +10,23 @@
 </head>
 <body>
     <h1>Welcome to Lobby!</h1>
-    <h2 th:text="|Your lobby's ID is ${lobby.id}. Share it with your friends to have them join!|"></h2>
+    <h2 th:text="|Your lobby's ID is ${lobby.generatedId}. Share it with your friends to have them join!|"></h2>
     <h3 id="players">
         <ul id="playerList"></ul>
     </h3>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        let lobbyPlayerNameList = /*[[${lobbyPlayerNameList}]]*/ 'default';
+        let playerNames = /*[[${playerNames}]]*/ 'default';
         /*]]>*/
         function createAndAppendListElements() {
-            lobbyPlayerNameList.forEach(player => {
+            playerNames.forEach(playerName => {
                 let myPlayer = document.createElement('li')
 
-                myPlayer.append(player);
+                myPlayer.append(playerName);
                 myPlayerUnorderedList.append(myPlayer);
             });
         }
+
         window.onload = () => {
             createAndAppendListElements()
         }
@@ -41,7 +42,7 @@
             location.reload();
         }, 10000);
 
-        lobbyPlayerNameList.length == 7 ? clearInterval(lobbyReloadInterval) : 0;
+        playerNames.length == 7 ? clearInterval(lobbyReloadInterval) : 0;
     </script>
 </body>
 </html>

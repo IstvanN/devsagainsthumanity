@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.greenfoxacademy.dah.models.Lobby;
 
+import com.greenfoxacademy.dah.models.Player;
+import com.greenfoxacademy.dah.services.LobbyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/cah/game")
 public class LobbyController {
-    List<Lobby> lobbies = new ArrayList<>();
+    LobbyService lobbyService;
+
+    @Autowired
+    public LobbyController(LobbyService lobbyService) {
+        this.lobbyService = lobbyService;
+    }
 
     @GetMapping(value = { "", "/" })
     public String showIndex() {
@@ -22,33 +30,33 @@ public class LobbyController {
     @PostMapping("/createLobby")
     public String createLobby(@RequestParam(value = "creatorName") String creatorName,
                               @RequestParam("lobbyName") String lobbyName) {
-        Lobby lobby = new Lobby(lobbyName, creatorName);
-        lobbies.add(lobby);
-        System.out.println(lobby.getId());
-        return "redirect:/cah/game/" + lobby.getId() + "/lobby/";
+        Lobby lobby = lobbyService.createNewLobby(lobbyName);
+        Player player = lobbyService.createPlayer(creatorName);
+        lobbyService.addPlayerToLobby(lobby, player);
+
+        return "redirect:/cah/game/" + lobby.getGeneratedId() + "/" + player.getId() + "/lobby/";
     }
 
-    @GetMapping("/{id}/lobby/")
-    public String showLobby(@PathVariable("id") int id, Model model) {
-        Lobby lobby = getLobbyById(id);
+    @GetMapping("/{lobbyId}/{playerId}/lobby/")
+    public String showLobby(@PathVariable("lobbyId") int lobbyId,
+                            @PathVariable("playerId") long playerId, Model model) {
+        Lobby lobby = lobbyService.getLobbyByGeneratedId(lobbyId);
+        Player player = lobbyService.getPlayerById(playerId);
+        List<String> playerNames = lobbyService.getPlayerNames();
+
         model.addAttribute("lobby", lobby);
-        model.addAttribute("lobbyPlayerNameList", lobby.getPlayerNameList());
+        model.addAttribute("playerNames", playerNames);
+        model.addAttribute("playerId", player.getId());
+
         return "lobby";
     }
 
     @PostMapping("/joinLobby")
     public String createLobby(@RequestParam(value = "playerName") String playerName,
                               @RequestParam("existingLobbyId") int existingLobbyId) {
-        getLobbyById(existingLobbyId).getPlayerNameList().add(playerName);
-        return "redirect:/cah/game/" + existingLobbyId + "/lobby/";
-    }
+        Player player = lobbyService.createPlayer(playerName);
+        lobbyService.getLobbyByGeneratedId(existingLobbyId).getPlayerList().add(player);
 
-    private Lobby getLobbyById(int id) {
-        for (Lobby lobby : lobbies) {
-            if (lobby.getId() == id) {
-                return lobby;
-            }
-        }
-        return null;
+        return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby/";
     }
 }
