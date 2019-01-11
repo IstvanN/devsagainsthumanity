@@ -11,27 +11,37 @@
 <body>
     <h1>Welcome to Lobby!</h1>
     <h2 th:text="|Your lobby's ID is ${lobby.id}. Share it with your friends to have them join!|"></h2>
-    <h3 id="players"></h3>
+    <h3 id="players">
+        <ul id="playerList"></ul>
+    </h3>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        let myPlayerList = document.getElementById("players");
         let lobbyPlayerNameList = /*[[${lobbyPlayerNameList}]]*/ 'default';
-
-        setInterval(function() {
-            while (myPlayerList.firstChild) {
-                myPlayerList.removeChild(myPlayerList.firstChild);
-            }
+        /*]]>*/
+        function createAndAppendListElements() {
             lobbyPlayerNameList.forEach(player => {
-                let myPlayerUnorderedList = document.createElement('ul');
-                myPlayerUnorderedList.setAttribute('id', 'playerList')
                 let myPlayer = document.createElement('li')
 
                 myPlayer.append(player);
                 myPlayerUnorderedList.append(myPlayer);
-                myPlayerList.append(myPlayerUnorderedList)
             });
-        }, 3000);
-        /*]]>*/
+        }
+        window.onload = () => {
+            createAndAppendListElements()
+        }
+
+        let myPlayerUnorderedList = document.getElementById('playerList');
+
+        let lobbyReloadInterval = setInterval(function() {
+            while (myPlayerUnorderedList.firstChild) {
+                myPlayerUnorderedList.removeChild(myPlayerUnorderedList.firstChild);
+            }
+
+            createAndAppendListElements();
+            location.reload();
+        }, 10000);
+
+        lobbyPlayerNameList.length == 7 ? clearInterval(lobbyReloadInterval) : 0;
     </script>
 </body>
 </html>
