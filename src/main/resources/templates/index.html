@@ -12,7 +12,7 @@
     <h1>Welcome to Devs Against Humanity!</h1>
     <div>
         <h2>Create a game here!</h2>
-        <form action="/cah/game/createLobby", method="POST">
+        <form action="/cah/game/create-lobby", method="POST">
             <label for="creatorName">Your name: </label>
             <input id="creatorName" name="creatorName" type="text" placeholder="Enter your nickname" required><br>
             <label for="lobbyName">Room name: </label>
@@ -21,7 +21,7 @@
         </form>
     </div> 
     <div>
-        <form action="/cah/game/joinLobby", method="POST">
+        <form action="/cah/game/join-lobby", method="POST">
         <h2>Join a game here!</h2>
             <input id="playerName" name="playerName" type="text" placeholder="Enter your nickname" required><br>
             <input id="existingLobbyId" name="existingLobbyId" type="number" placeholder="Enter the id of the game room" required><br>
