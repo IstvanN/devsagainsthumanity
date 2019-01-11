@@ -70,7 +70,7 @@ public class LobbyController {
         player.setReady(true);
 
         if (lobbyService.checkIfLobbyIsStartable(existingLobbyId)) {
-            return "/" + existingLobbyId + "/" + player.getId() + "/game-start";
+            return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/game-start";
         }
         return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby";
     }
