@@ -25,7 +25,7 @@ public class LobbyController {
         this.lobbyService = lobbyService;
     }
 
-    @GetMapping(value = { "", "/" })
+    @GetMapping(value = {"", "/"})
     public String showIndex() {
         return "index";
     }

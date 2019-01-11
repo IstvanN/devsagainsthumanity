@@ -22,16 +22,16 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class GameRoom {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-  private String name;
+    private String name;
 
-  @OneToMany
-  private List<Player> playerList;
+    @OneToMany
+    private List<Player> playerList;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "deck_id")
-  private Deck deck;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deck_id")
+    private Deck deck;
 }

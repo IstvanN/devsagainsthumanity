@@ -10,5 +10,6 @@ import java.util.List;
 public interface WhiteCardRepository extends CrudRepository<WhiteCard, Long> {
 
     List<WhiteCard> findAll();
+
     WhiteCard findById(long id);
 }

@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Long> {
 
-  Player findById(long id);
+    Player findById(long id);
 
-  List<Player> findAll();
+    List<Player> findAll();
 
-  Player findFirstByName(String name);
+    Player findFirstByName(String name);
 }

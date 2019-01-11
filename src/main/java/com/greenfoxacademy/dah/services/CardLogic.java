@@ -58,7 +58,7 @@ public class CardLogic {
 
     public void addCardsToHand(Hand hand, List<WhiteCard> whiteCards) {
         List<WhiteCard> cardsInHand = hand.getCards();
-        for(WhiteCard whiteCard : whiteCards) {
+        for (WhiteCard whiteCard : whiteCards) {
             cardsInHand.add(whiteCard);
         }
         hand.setCards(cardsInHand);
@@ -67,7 +67,7 @@ public class CardLogic {
 
     public void discardCardsFromHand(Hand hand, List<WhiteCard> whiteCards) {
         List<WhiteCard> cardsInHand = hand.getCards();
-        for(WhiteCard whiteCard : whiteCards) {
+        for (WhiteCard whiteCard : whiteCards) {
             cardsInHand.remove(whiteCard);
         }
         hand.setCards(cardsInHand);
@@ -85,7 +85,7 @@ public class CardLogic {
 
     public void discardWhiteCardsFromDeck(Deck deck, List<WhiteCard> cards) {
         List<WhiteCard> whiteCards = deck.getWhiteCards();
-        for(WhiteCard card : cards) {
+        for (WhiteCard card : cards) {
             whiteCards.remove(whiteCardRepository.findById(card.getId()));
         }
         deck.setWhiteCards(whiteCards);

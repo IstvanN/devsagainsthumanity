@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface LobbyRepository extends CrudRepository<Lobby, Long> {
 
-  Lobby getByGeneratedId(int generatedId);
+    Lobby getByGeneratedId(int generatedId);
 }
