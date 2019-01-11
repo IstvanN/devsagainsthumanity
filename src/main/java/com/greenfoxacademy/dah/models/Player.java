@@ -25,6 +25,7 @@ public class Player {
   private Hand hand;
 
   private int score;
+  private boolean isReady;
   private boolean canBid;
   private boolean canGiveCard;
 
