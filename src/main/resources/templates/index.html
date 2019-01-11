@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>Welcome to Devs Against Humanity!</h1>
+    <div>
+        <h2>Create a game here!</h2>
+        <form action="/cah/game/create-lobby", method="POST">
+            <label for="creatorName">Your name: </label>
+            <input id="creatorName" name="creatorName" type="text" placeholder="Enter your nickname" required><br>
+            <label for="lobbyName">Room name: </label>
+            <input id="lobbyName" name="lobbyName" type="text" placeholder="Enter the name of the game room" required><br>
+            <button>CREATE ROOM</button>
+        </form>
+    </div> 
+    <div>
+        <h2>Join a game here!</h2>
+        <form action="/cah/game/join-lobby", method="POST">
+            <input id="playerName" name="playerName" type="text" placeholder="Enter your nickname" required><br>
+            <input id="existingLobbyId" name="existingLobbyId" type="number" placeholder="Enter the id of the game room" required><br>
+            <button>JOIN ROOM</button>
+        </form>
+    </div>   
+</body>
+</html>
