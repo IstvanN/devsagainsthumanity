@@ -11,6 +11,27 @@
 <body>
     <h1>Welcome to Lobby!</h1>
     <h2 th:text="|Your lobby's ID is ${lobby.id}. Share it with your friends to have them join!|"></h2>
-    <h3 th:text="${players}"></h3>
+    <h3 id="players"></h3>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let myPlayerList = document.getElementById("players");
+        let lobbyPlayerNameList = /*[[${lobbyPlayerNameList}]]*/ 'default';
+
+        setInterval(function() {
+            while (myPlayerList.firstChild) {
+                myPlayerList.removeChild(myPlayerList.firstChild);
+            }
+            lobbyPlayerNameList.forEach(player => {
+                let myPlayerUnorderedList = document.createElement('ul');
+                myPlayerUnorderedList.setAttribute('id', 'playerList')
+                let myPlayer = document.createElement('li')
+
+                myPlayer.append(player);
+                myPlayerUnorderedList.append(myPlayer);
+                myPlayerList.append(myPlayerUnorderedList)
+            });
+        }, 3000);
+        /*]]>*/
+    </script>
 </body>
 </html>

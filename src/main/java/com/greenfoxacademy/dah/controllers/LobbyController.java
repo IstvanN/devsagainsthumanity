@@ -32,6 +32,7 @@ public class LobbyController {
     public String showLobby(@PathVariable("id") int id, Model model) {
         Lobby lobby = getLobbyById(id);
         model.addAttribute("lobby", lobby);
+        model.addAttribute("lobbyPlayerNameList", lobby.getPlayerNameList());
         return "lobby";
     }
 
