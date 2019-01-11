@@ -37,10 +37,10 @@ public class LobbyController {
         Player player = lobbyService.createPlayer(creatorName);
         lobbyService.addPlayerToLobby(lobby, player);
 
-        return "redirect:/cah/game/" + lobby.getGeneratedId() + "/" + player.getId() + "/lobby/";
+        return "redirect:/cah/game/" + lobby.getGeneratedId() + "/" + player.getId() + "/lobby";
     }
 
-    @GetMapping("/{lobbyId}/{playerId}/lobby/")
+    @GetMapping("/{lobbyId}/{playerId}/lobby")
     public String showLobby(@PathVariable("lobbyId") int lobbyId,
                             @PathVariable("playerId") long playerId, Model model) {
         Lobby lobby = lobbyService.getLobbyByGeneratedId(lobbyId);
@@ -48,8 +48,11 @@ public class LobbyController {
         List<String> playerNames = lobbyService.getPlayerNames();
 
         model.addAttribute("lobby", lobby);
+      System.out.println(lobby.getGeneratedId());
         model.addAttribute("playerNames", playerNames);
+      System.out.println(player.getName());
         model.addAttribute("playerId", player.getId());
+      System.out.println(playerNames);
 
         return "lobby";
     }
@@ -59,8 +62,9 @@ public class LobbyController {
                               @RequestParam("existingLobbyId") int existingLobbyId) {
         if (lobbyService.getLobbyByGeneratedId(existingLobbyId) != null) {
             Player player = lobbyService.createPlayer(playerName);
-            lobbyService.getLobbyByGeneratedId(existingLobbyId).getPlayerList().add(player);
+            Lobby lobby = lobbyService.getLobbyByGeneratedId(existingLobbyId);
 
+            lobbyService.addPlayerToLobby(lobby, player);
             return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby";
         }
         return "redirect:/cah/game/";
