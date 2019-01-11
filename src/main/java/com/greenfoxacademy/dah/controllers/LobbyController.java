@@ -69,7 +69,7 @@ public class LobbyController {
         Player player = lobbyService.getPlayerByName(playerName);
         player.setReady(true);
 
-        if (lobbyService.checkIfEveryoneIsReady(existingLobbyId)) {
+        if (lobbyService.checkIfLobbyIsStartable(existingLobbyId)) {
             return "/" + existingLobbyId + "/" + player.getId() + "/game-start";
         }
         return "redirect:/cah/game/" + existingLobbyId + "/" + player.getId() + "/lobby";

@@ -60,7 +60,7 @@ public class LobbyService {
     return playerRepository.findFirstByName(playerName);
   }
 
-  public boolean checkIfEveryoneIsReady(int existingLobbyId) {
+  public boolean checkIfLobbyIsStartable(int existingLobbyId) {
     boolean isEveryOneReady = true;
     Lobby lobby = lobbyRepository.getByGeneratedId(existingLobbyId);
 
@@ -69,6 +69,8 @@ public class LobbyService {
         isEveryOneReady = false;
       }
     }
-    return isEveryOneReady;
+
+    lobby.setStartable(isEveryOneReady);
+    return lobby.isStartable();
   }
 }
